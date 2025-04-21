@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from .forms import CargarExcelForm
 from .models import Precio, Portafolio
 import pandas as pd
-from django.contrib import messages
 
 def excel_load(request):
     mensaje = None
@@ -16,7 +15,7 @@ def excel_load(request):
 
                 # Procesar hoja "weights" para el modelo Portafolio
                 weights_df = excel_data['weights']
-                for _, fila in weights_df.iterrows():
+                for i, fila in weights_df.iterrows():
                     Portafolio.objects.create(
                         fecha=fila['Fecha'],
                         activos=fila['activos'],
@@ -26,7 +25,7 @@ def excel_load(request):
 
                 # Procesar hoja "Precios" para el modelo Precio
                 precios_df = excel_data['Precios']
-                for _, fila in precios_df.iterrows():
+                for i, fila in precios_df.iterrows():
                     Precio.objects.create(
                         dates=fila['Dates'],
                         eeuu=fila.get('EEUU'),
