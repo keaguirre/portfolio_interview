@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from .forms import CargarExcelForm
 from .models import Precio, Portafolio
 import pandas as pd
+from django.contrib import messages
 
 def excel_load(request):
+    mensaje = None
     if request.method == 'POST':
         form = CargarExcelForm(request.POST, request.FILES)
         if form.is_valid():
@@ -45,11 +47,9 @@ def excel_load(request):
                         abs=fila.get('ABS'),
                         mm_caja=fila.get('MM/Caja')
                     )
-
-                return redirect('success')  # Cambia esto a tu vista de éxito o un mensaje
+                mensaje = "Archivo cargado correctamente"
             except Exception as e:
                 form.add_error(None, f'Error al procesar el archivo: {e}')
     else:
         form = CargarExcelForm()
-
-    return render(request, 'excel_load_form.html', {'form': form})
+    return render(request, 'excel_load_form.html', {'form': form, 'mensaje': mensaje})

@@ -16,9 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.urls import path, include 
-
+from .views import excel_load
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('interview.urls'))
+    path('upload_excel/', excel_load, name='upload_excel'),
 ]

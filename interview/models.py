@@ -1,5 +1,8 @@
 from django.db import models
 
+# Create your models here.
+from django.db import models
+
 class Precio(models.Model):
     dates = models.DateField()
     eeuu = models.DecimalField(max_digits=10, decimal_places=4, null=True, blank=True)
