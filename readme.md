@@ -1,7 +1,7 @@
 
 
 
-## Libs
+## Base libs
 ```
 Django==5.2
 numpy==2.2.5
